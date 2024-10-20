@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | Mish Pets",
     absolute: "Mish Pets",
   },
-  description: "A full-stack e-commerce application built with Next.js 15",
+  description: "Mish Pets",
 };
 
 export default function RootLayout({
