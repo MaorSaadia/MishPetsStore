@@ -1,26 +1,11 @@
+import logo from "@/assets/logo.png";
+import { getWixServerClient } from "@/lib/wix-client.server";
+import { getCart } from "@/wix-api/cart";
 import Image from "next/image";
 import Link from "next/link";
 
-import { getWixClient } from "@/lib/wix-client.base";
-import logo from "@/assets/logo.png";
-
-async function getCart() {
-  const wixClient = getWixClient();
-  try {
-    return await wixClient.currentCart.getCurrentCart();
-  } catch (error) {
-    if (
-      (error as any).details.applicationError.code === "OWNED_CART_NOT_FOUND"
-    ) {
-      return null;
-    } else {
-      throw error;
-    }
-  }
-}
-
 export default async function Navbar() {
-  const cart = await getCart();
+  const cart = await getCart(getWixServerClient());
 
   const totalQuantity =
     cart?.lineItems.reduce((acc, item) => acc + (item.quantity || 0), 0) || 0;
