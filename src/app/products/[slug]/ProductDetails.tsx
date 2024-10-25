@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Badge from "@/components/ui/badge";
+import AddToCartButton from "@/components/AddToCartButton";
 
 import ProductMedia from "./ProductMedia";
 import ProductOptions from "./ProductOptions";
@@ -101,6 +102,15 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
               )}
           </div>
         </div>
+        {inStock ? (
+          <AddToCartButton
+            product={product}
+            selectedOptions={selectedOptions}
+            quantity={quantity}
+          />
+        ) : (
+          "Out of stock"
+        )}
         {!!product.additionalInfoSections?.length && (
           <div className="space-y-1.5 text-sm text-muted-foreground">
             <span className="flex items-center gap-2">
@@ -116,7 +126,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                       dangerouslySetInnerHTML={{
                         __html: section.description || "",
                       }}
-                      className="prose dark:prose-invert text-sm text-muted-foreground"
+                      className="prose text-sm text-muted-foreground dark:prose-invert"
                     />
                   </AccordionContent>
                 </AccordionItem>
