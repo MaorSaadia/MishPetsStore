@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Lora } from "next/font/google";
-import "./globals.css";
+
+import { Toaster } from "@/components/ui/toaster";
+import ReactQueryProvider from "./ReactQueryProvider";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import "./globals.css";
 
 const lora = Lora({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   title: {
     template: "%s | Mish Pets",
@@ -22,9 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lora.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <ReactQueryProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ReactQueryProvider>
+        <Toaster />
       </body>
     </html>
   );
