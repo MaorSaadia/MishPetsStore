@@ -1,21 +1,20 @@
 "use client";
 
-import { useState } from "react";
-import { InfoIcon } from "lucide-react";
-
-import { products } from "@wix/stores";
-import { checkInStock, findVariant } from "@/lib/utils";
+import AddToCartButton from "@/components/AddToCartButton";
+import BackInStockNotificationButton from "@/components/BackInStockNotificationButton";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Badge from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Badge from "@/components/ui/badge";
-import AddToCartButton from "@/components/AddToCartButton";
-
+import { checkInStock, findVariant } from "@/lib/utils";
+import { products } from "@wix/stores";
+import { InfoIcon } from "lucide-react";
+import { useState } from "react";
 import ProductMedia from "./ProductMedia";
 import ProductOptions from "./ProductOptions";
 import ProductPrice from "./ProductPrice";
@@ -111,7 +110,11 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             className="w-full"
           />
         ) : (
-          "Out of stock"
+          <BackInStockNotificationButton
+            product={product}
+            selectedOptions={selectedOptions}
+            className="w-full"
+          />
         )}
         {!!product.additionalInfoSections?.length && (
           <div className="space-y-1.5 text-sm text-muted-foreground">
