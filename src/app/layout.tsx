@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Lora } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 
 import { Toaster } from "@/components/ui/toaster";
 import ReactQueryProvider from "./ReactQueryProvider";
@@ -24,12 +25,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lora.className}>
-        <ReactQueryProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </ReactQueryProvider>
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem={true}
+          disableTransitionOnChange
+        >
+          <ReactQueryProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </ReactQueryProvider>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
