@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Loader2, ShoppingCartIcon, X } from "lucide-react";
 
-import { currentCart } from "@wix/ecom";
+import CheckoutButton from "@/components/CheckoutButton";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -18,6 +18,7 @@ import {
   useRemoveCartItem,
   useUpdateCartItemQuantity,
 } from "@/hooks/cart";
+import { currentCart } from "@wix/ecom";
 
 interface ShoppingCartButtonProps {
   initialData: currentCart.Cart | null;
@@ -99,9 +100,10 @@ export default function ShoppingCartButton({
                 Shipping and taxes calculated at checkout
               </p>
             </div>
-            <Button size="lg" disabled={!totalQuantity || cartQuery.isFetching}>
-              Checkout
-            </Button>
+            <CheckoutButton
+              size="lg"
+              disabled={!totalQuantity || cartQuery.isFetching}
+            />
           </div>
         </SheetContent>
       </Sheet>

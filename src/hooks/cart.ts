@@ -6,15 +6,16 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
+import { wixBrowserClient } from "@/lib/wix-client.browser";
 import {
   addToCart,
   AddToCartValues,
+  clearCart,
   getCart,
   removeCartItem,
   updateCartItemQuantity,
   UpdateCartItemQuantityValues,
 } from "@/wix-api/cart";
-import { wixBrowserClient } from "@/lib/wix-client.browser";
 import { currentCart } from "@wix/ecom";
 import { useToast } from "./use-toast";
 
@@ -129,5 +130,18 @@ export function useRemoveCartItem() {
     onSettled() {
       queryClient.invalidateQueries({ queryKey });
     },
+  });
+}
+
+export function useClearCart() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => clearCart(wixBrowserClient),
+    onSuccess() {
+      queryClient.setQueryData(queryKey, null);
+      queryClient.invalidateQueries({ queryKey });
+    },
+    retry: 3,
   });
 }
