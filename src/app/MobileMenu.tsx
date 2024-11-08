@@ -1,5 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { MenuIcon } from "lucide-react";
+import Link from "next/link";
+
 import SearchField from "@/components/SearchField";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,13 +14,9 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import UserButton from "@/components/UserButton";
-import { twConfig } from "@/lib/utils";
 import { members } from "@wix/members";
 import { collections } from "@wix/stores";
-import { MenuIcon } from "lucide-react";
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { twConfig } from "@/lib/utils";
 
 interface MobileMenuProps {
   collections: collections.Collection[];

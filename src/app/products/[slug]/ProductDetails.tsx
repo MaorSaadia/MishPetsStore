@@ -1,20 +1,22 @@
 "use client";
 
-import AddToCartButton from "@/components/AddToCartButton";
-import BackInStockNotificationButton from "@/components/BackInStockNotificationButton";
+import { useState } from "react";
+import { InfoIcon } from "lucide-react";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Badge from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { checkInStock, findVariant } from "@/lib/utils";
 import { products } from "@wix/stores";
-import { InfoIcon } from "lucide-react";
-import { useState } from "react";
+import Badge from "@/components/ui/badge";
+import AddToCartButton from "@/components/AddToCartButton";
+import BuyNowButton from "@/components/BuyNowButton";
+import BackInStockNotificationButton from "@/components/BackInStockNotificationButton";
 import ProductMedia from "./ProductMedia";
 import ProductOptions from "./ProductOptions";
 import ProductPrice from "./ProductPrice";
@@ -102,13 +104,21 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
           </div>
         </div>
         {inStock ? (
-          <AddToCartButton
-            product={product}
-            selectedOptions={selectedOptions}
-            quantity={quantity}
-            disabled={availableQuantityExceeded || quantity < 1}
-            className="w-full"
-          />
+          <div className="flex items-center gap-2.5">
+            <AddToCartButton
+              product={product}
+              selectedOptions={selectedOptions}
+              quantity={quantity}
+              disabled={availableQuantityExceeded || quantity < 1}
+              className="w-full"
+            />
+            <BuyNowButton
+              product={product}
+              selectedOptions={selectedOptions}
+              quantity={quantity}
+              disabled={availableQuantityExceeded || quantity < 1}
+            />
+          </div>
         ) : (
           <BackInStockNotificationButton
             product={product}
