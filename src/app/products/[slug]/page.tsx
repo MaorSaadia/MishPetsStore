@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 
 import Product from "@/components/Product";
 import { Skeleton } from "@/components/ui/skeleton";
-import { delay } from "@/lib/utils";
 import { getWixServerClient } from "@/lib/wix-client.server";
 import { getProductBySlug, getRelatedProducts } from "@/wix-api/products";
 
@@ -42,8 +41,6 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params: { slug } }: PageProps) {
-  await delay(3000);
-
   const product = await getProductBySlug(getWixServerClient(), slug);
 
   if (!product?._id) notFound();
@@ -64,8 +61,6 @@ interface RelatedProductsProps {
 }
 
 async function RelatedProducts({ productId }: RelatedProductsProps) {
-  await delay(2000);
-
   const relatedProducts = await getRelatedProducts(
     getWixServerClient(),
     productId,

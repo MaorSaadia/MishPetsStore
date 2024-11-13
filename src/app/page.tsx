@@ -1,15 +1,15 @@
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Suspense } from "react";
+
 import banner from "@/assets/banner.jpg";
 import Product from "@/components/Product";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { delay } from "@/lib/utils";
 import { getWixServerClient } from "@/lib/wix-client.server";
 import { getCollectionBySlug } from "@/wix-api/collections";
 import { queryProducts } from "@/wix-api/products";
-import { ArrowRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -46,8 +46,6 @@ export default function Home() {
 }
 
 async function FeaturedProducts() {
-  await delay(1000);
-
   const wixClient = getWixServerClient();
 
   const collection = await getCollectionBySlug(wixClient, "all-products");

@@ -4,7 +4,6 @@ import { Suspense } from "react";
 
 import { ProductsSort, queryProducts } from "@/wix-api/products";
 import { getWixServerClient } from "@/lib/wix-client.server";
-import { delay } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import PaginationBar from "@/components/PaginationBar";
 import Product from "@/components/Product";
@@ -72,8 +71,6 @@ async function ProductResults({
   priceMax,
   sort,
 }: ProductResultsProps) {
-  await delay(1000);
-
   const pageSize = 8;
 
   const products = await queryProducts(getWixServerClient(), {
